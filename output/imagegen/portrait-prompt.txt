@@ -1,0 +1,5 @@
+Tool: built-in image_gen
+Source: C:/Users/Madhavrao/Downloads/shared image.jpg
+Output: public/madhava-portrait.png
+
+Use case: identity-preserve / background-extraction. Edit the supplied portrait for an AI engineer's professional portfolio hero. Preserve this exact person's facial identity, skin tone, hairstyle, beard, expression, gaze, navy blazer and white shirt. Keep realistic skin texture. Remove the gray background completely, with genuine alpha transparency and clean natural hair edges, no gray halo. Produce a polished photorealistic chest-up portrait, centered, full hair visible with a little headroom, shoulders comfortably framed, lower torso ending at bottom edge. Gently balance exposure and studio lighting; subtle neutral/cool color grading to suit a restrained mint and teal website (#397d6d, #e7f1ed) while keeping skin natural and the suit navy. No text, graphics, props, frame, backdrop, fake checkerboard or watermark. Do not reshape or beautify the face. Output one high-quality transparent PNG.
