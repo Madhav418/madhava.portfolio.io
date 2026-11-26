@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import { ArrowLeft, ArrowRight, ExternalLink } from 'lucide-react'
-import { GithubIcon } from '@/components/ui/BrandIcons'
 import { GlassCard } from '@/components/ui/GlassCard'
 import { LinkButton } from '@/components/ui/Button'
 import { Reveal } from '@/components/ui/Reveal'
@@ -54,12 +53,6 @@ export function ProjectDetail() {
               <LinkButton href={project.liveUrl} target="_blank" rel="noreferrer" variant="primary">
                 Live site
                 <ExternalLink size={15} aria-hidden="true" />
-              </LinkButton>
-            )}
-            {project.githubUrl && (
-              <LinkButton href={project.githubUrl} target="_blank" rel="noreferrer" variant="glass">
-                <GithubIcon size={15} aria-hidden="true" />
-                Code
               </LinkButton>
             )}
           </div>

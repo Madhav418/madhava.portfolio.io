@@ -1,4 +1,4 @@
-﻿export type Project = { slug: string; title: string; summary: string; description: string[]; role: string; year: string; stack: string[]; liveUrl?: string; githubUrl?: string; challenge: string; solution: string; results: string[] }
+export type Project = { slug: string; title: string; summary: string; description: string[]; role: string; year: string; stack: string[]; liveUrl?: string; challenge: string; solution: string; results: string[] }
 
 export const projects: Project[] = [
   {
@@ -15,7 +15,6 @@ export const projects: Project[] = [
     role: 'Multimodal AI & Computer Vision',
     year: '',
     stack: ['VLMs', 'Multimodal LLMs', 'YOLO', 'Qwen3-VL', 'Ollama', 'Python', 'FastAPI', 'React', 'TypeScript', 'Three.js', 'COLMAP', 'SQLAlchemy', 'PostgreSQL', 'S3 Storage', 'Docker', 'Railway'],
-    githubUrl: 'https://github.com/harikeerthijsan/jsan_aeromind',
     challenge: 'Convert drone imagery into useful tower inspection evidence while handling small equipment crops, uncertain manufacturer identities, false defect findings, and the relationship between 2D observations and 3D geometry.',
     solution: 'Combine YOLO localization with two-stage Qwen3-VL identification, structured multimodal LLM outputs, second-model defect verification, and human approval. Connect reviewed observations to inventory and reporting, and use COLMAP geometry to propose equipment locations in an interactive digital twin.',
     results: [
@@ -41,7 +40,6 @@ export const projects: Project[] = [
     role: 'Geospatial Engineering & Full Stack',
     year: '',
     stack: ['PostGIS', 'MapLibre', 'FastAPI', 'Python', 'React', 'TypeScript', 'PostgreSQL', 'SQLAlchemy', 'Alembic', 'Google Places API', 'AWS GrabMaps', 'OpenPyXL', 'Docker', 'Railway'],
-    githubUrl: 'https://github.com/madhavad418/GeoDiscover',
     challenge: 'Reconcile inconsistent place records across sources and geographic areas, explain possible changes, and ensure only evidence-backed, independently reviewed records reach customer delivery.',
     solution: 'Combine versioned spatial imports and an interactive map with identity- and distance-based POI matching. Carry the resulting findings through role-based tasks, evidence validation, independent QC, and gated template exports, while keeping bounded provider collection separate from approved delivery.',
     results: [

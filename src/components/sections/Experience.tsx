@@ -15,7 +15,7 @@ export function Experience() {
               <span className="h-2.5 w-2.5 rounded-full bg-gradient-to-r from-accent to-accent-2" />
             </span>
 
-            <GlassCard hoverLift className="p-6">
+            <GlassCard className="p-6">
               <div className="flex flex-wrap items-baseline justify-between gap-2">
                 <h3 className="font-heading text-lg font-semibold text-foreground">
                   {item.role} · {item.company}
@@ -25,16 +25,22 @@ export function Experience() {
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                 {item.description}
               </p>
-              <ul className="mt-4 space-y-2">
-                {item.highlights.map((highlight) => (
-                  <li
-                    key={highlight}
-                    className="flex gap-2 text-sm text-muted-foreground before:mt-2 before:h-1.5 before:w-1.5 before:shrink-0 before:rounded-full before:bg-accent-2"
-                  >
-                    {highlight}
-                  </li>
-                ))}
-              </ul>
+              <details open={i === 0} className="experience-details mt-2">
+                <summary className="flex min-h-11 w-fit cursor-pointer list-none items-center gap-2 rounded-sm text-sm font-semibold text-accent">
+                  Highlights
+                  <ChevronDown size={16} aria-hidden="true" />
+                </summary>
+                <ul className="space-y-2">
+                  {item.highlights.map((highlight) => (
+                    <li
+                      key={highlight}
+                      className="flex gap-2 text-sm text-muted-foreground before:mt-2 before:h-1.5 before:w-1.5 before:shrink-0 before:rounded-full before:bg-accent-2"
+                    >
+                      {highlight}
+                    </li>
+                  ))}
+                </ul>
+              </details>
             </GlassCard>
           </Reveal>
         ))}
@@ -42,3 +48,4 @@ export function Experience() {
     </section>
   )
 }
+import { ChevronDown } from 'lucide-react'
