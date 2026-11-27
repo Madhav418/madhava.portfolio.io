@@ -8,14 +8,23 @@ function Caption({ x, y, children }: { x: number; y: number; children: ReactNode
 
 function InspectionScene() {
   return <>
-    {[0,1,2].map(i=><g key={i} transform={`translate(${55+i*23} ${65+i*23})`}><rect width="205" height="184" rx="5" fill="#24483c" stroke="#9abcab" strokeOpacity=".55" /><path d="M15 145 65 90 105 125 145 70 190 145Z" fill="#567d66" opacity=".4" /><circle cx="47" cy="42" r="15" fill="#c8dcaf" opacity=".35" /></g>)}
-    <rect x="150" y="150" width="78" height="92" stroke="#dce9b3" strokeWidth="2" strokeDasharray="5 4" />
-    <path d="M260 187H345 M330 181 345 187 330 193" stroke="#dce9b3" />
-    <rect x="365" y="65" width="290" height="245" rx="5" fill="#183b30" stroke="#839f8a" />
-    <Caption x={387} y={99}>Compliance review</Caption><path d="M387 113H630" stroke="#839f8a" opacity=".4" />
-    {['Object detection','Location metadata','Rule validation','Traceable report'].map((label,i)=><g key={label}><circle cx="398" cy={143+i*43} r="9" stroke="#c5dca8" /><path d={`M394 ${143+i*43}l3 3 5-6`} stroke="#c5dca8" /><Caption x={421} y={148+i*43}>{label}</Caption></g>)}
-    <Caption x={74} y={310}>Batch imagery</Caption>
-    <text x="360" y="370" textAnchor="middle" fill="currentColor" opacity=".7" fontSize="12" letterSpacing="2">INGEST → DETECT → VALIDATE → REPORT</text>
+    <path d="M30 130h660v154H30Z" fill="#294a3e" stroke="#819c88" />
+    <path d="M30 130h660v15H30Z" fill="#9eb0a0" />
+    <path d="M63 130l18-11 22 8 13-4 20 7-12 9H74Z" fill="#18352d" stroke="#d8c69d" />
+    <path d="M197 131h101v141H197Z" fill="#17372e" stroke="#a7bcac" strokeWidth="3" />
+    <ellipse cx="248" cy="131" rx="56" ry="14" fill="#284c40" stroke="#c4d5c3" strokeWidth="3" />
+    <path d="M208 131h80m-64-6h48m-48 12h48M214 157v90m0-68h20m-20 19h20m-20 19h20m-20 19h20" stroke="#a7bcac" />
+    <path d="M297 202H645" stroke="#95b4a1" strokeWidth="33" />
+    <path d="M297 202H645" stroke="#4f7464" strokeWidth="26" />
+    <ellipse cx="645" cy="202" rx="9" ry="16" fill="#243e36" stroke="#a7bcac" />
+    <path d="M255 173v59q0 20 22 20h366" stroke="#152e27" strokeWidth="12" />
+    <path d="M255 173v59q0 20 22 20h366" stroke="#e8d59e" strokeWidth="4" />
+    <path d="M96 116V82H52m197 31V76h38m240 109V84h36M448 254v49h25" stroke="#c2d6bc" />
+    <Caption x={52} y={70}>Pothole</Caption>
+    <Caption x={298} y={81}>Manhole</Caption>
+    <Caption x={563} y={74}>Underground pipe</Caption>
+    <Caption x={480} y={309}>Fibre-optic cable</Caption>
+    <text x="360" y="367" textAnchor="middle" fill="currentColor" fontSize="15" letterSpacing="1">INVENTORY / RULE VALIDATION / SAFETY CHECKS</text>
   </>
 }
 
@@ -65,7 +74,7 @@ function DistanceScene() {
 }
 
 const scenes: Record<string, { eyebrow: string; name: string; stack: string; scene: ReactNode }> = {
-  'automated-infrastructure-inspection': { eyebrow: 'Infrastructure intelligence', name: 'Inspection', stack: 'YOLO / Azure / Compliance', scene: <InspectionScene /> },
+  'automated-infrastructure-inspection': { eyebrow: 'Roadside and underground assets', name: 'Field inspection', stack: 'Asset inventory / Rule validation / Safety checks', scene: <InspectionScene /> },
   'rag-document-chatbot': { eyebrow: 'Retrieval-augmented generation', name: 'Document intelligence', stack: 'LangChain / ChromaDB / OpenAI', scene: <RagScene /> },
   'electrical-asset-monitoring': { eyebrow: 'Computer vision for utilities', name: 'Asset intelligence', stack: 'YOLOv8 / OpenCV / Condition monitoring', scene: <ElectricalScene /> },
   'vision-distance-estimation': { eyebrow: 'Monocular vision research', name: 'Perspective & distance', stack: 'Calibration / Geometry / OpenCV', scene: <DistanceScene /> },

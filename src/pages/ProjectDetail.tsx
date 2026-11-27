@@ -116,7 +116,7 @@ export function ProjectDetail() {
 
       {project.workflow && (
         <section aria-labelledby="project-workflow" className="mt-10">
-          <h2 id="project-workflow" className="font-heading text-2xl font-semibold">How GeoDiscover works</h2>
+          <h2 id="project-workflow" className="font-heading text-2xl font-semibold">{geoDiscover ? 'How GeoDiscover works' : 'Inspection workflow'}</h2>
           <ol className="mt-4 list-decimal space-y-4 pl-7 marker:font-semibold marker:text-accent">
             {project.workflow.map((step) => (
               <li key={step.title} className="border-t border-border py-3 pl-2">

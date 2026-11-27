@@ -56,10 +56,15 @@ export const projects: Project[] = [
   {
     "slug": "automated-infrastructure-inspection",
     "title": "Automated Infrastructure Inspection",
-    "summary": "Large-scale image validation with 95+ specialized YOLO models and traceable compliance reporting.",
+    "summary": "Image-based inventory and safety checks for potholes, manholes, underground pipes, and fibre-optic cables.",
     "description": [
-      "An end-to-end infrastructure inspection pipeline built to process 1,000+ images per batch across 80+ compliance validation rules.",
-      "The system combines specialized YOLO models, scalable Azure storage, distributed execution, and structured reporting to make inspection results traceable."
+      "A computer vision pipeline for reviewing field photos of potholes, manholes, underground pipes, and fibre-optic cable infrastructure. It records visible assets and conditions, checks them against inspection rules, and keeps each finding tied to its source photo and available location evidence."
+    ],
+    "workflow": [
+      { title: "Organize and locate inspection photos", description: "Read batches from Azure Blob Storage, handle duplicate and irrelevant images, and extract EXIF GPS and visible location text when available." },
+      { title: "Build the asset inventory", description: "Use specialized YOLO models to identify visible roadside and underground assets. Link findings to the original or annotated photos so reviewers can check what was captured." },
+      { title: "Validate rules and review safety findings", description: "Check evidence across available views, including manhole or pit inspection, equipment positioning, and fibre cable labelling. Flag findings that need human review or another photo." },
+      { title: "Export a traceable inspection report", description: "Capture asset classifications, rule findings, and available location evidence in CSV reports. Use annotated images to review flagged conditions and plan follow-up." }
     ],
     "role": "AI Engineering",
     "year": "2026",
@@ -75,13 +80,13 @@ export const projects: Project[] = [
       "Pillow",
       "piexif"
     ],
-    "challenge": "Validate large batches of infrastructure images across many compliance rules while preserving image metadata and a reliable audit trail.",
-    "solution": "Deployed 95+ specialized YOLO models with a 90% confidence threshold. Integrated Azure Blob Storage with retries and chunked streaming, Apache Spark for distributed model execution, and automated CSV reporting with EXIF GPS extraction and OCR-based location verification.",
+    "challenge": "Review large, inconsistent batches of field imagery, inventory visible assets, and flag safety or rule exceptions with enough evidence for a reviewer to follow up.",
+    "solution": "Deployed 95+ specialized YOLO models with a 90% confidence threshold and used Apache Spark for distributed execution. The Azure-backed pipeline extracts EXIF GPS, checks visible location text with OCR, and produces annotated imagery and CSV reports for human review.",
     "results": [
       "Processed 1,000+ images per batch across 80+ compliance validation rules.",
-      "Supported multi-angle checks for cable labelling, device positioning, and pit inspection.",
+      "Supported multi-angle checks for cable labelling, equipment positioning, and pit inspection.",
       "Preserved metadata in image overlays and handled duplicates, folder structures, and irrelevant-image filtering.",
-      "Produced traceable classification reports and complete audit trails."
+      "Produced traceable reports that connect asset classifications and rule findings to the images used for review."
     ]
   },
   {
