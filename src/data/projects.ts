@@ -1,4 +1,4 @@
-export type Project = { slug: string; title: string; summary: string; description: string[]; role: string; year: string; stack: string[]; liveUrl?: string; challenge: string; solution: string; results: string[] }
+export type Project = { slug: string; title: string; summary: string; description: string[]; workflow?: { title: string; description: string }[]; role: string; year: string; stack: string[]; liveUrl?: string; challenge: string; solution: string; results: string[] }
 
 export const projects: Project[] = [
   {
@@ -31,11 +31,13 @@ export const projects: Project[] = [
     title: 'GeoDiscover: Places Intelligence',
     summary: 'A geospatial workspace for POI discovery, interactive mapping, explainable matching, and evidence-based review and delivery.',
     description: [
-      'GeoDiscover, presented in the repository as JSAN Places Intelligence, is a Southeast Asia places-intelligence POC built with React, MapLibre, FastAPI, and PostgreSQL/PostGIS. It connects customer baseline datasets, area-of-interest exploration, source comparison, review tasks, and quality-controlled delivery.',
-      'CSV and Excel imports preserve original columns alongside normalized identities, categories, addresses, and spatial coordinates. Atomic validation rejects invalid or duplicate IDs and inconsistent coordinates, while changed files create new dataset versions. PostGIS geometry columns and GiST indexes support persistent geospatial data access.',
-      'The interactive AOI viewer supports GeoJSON, Shapefiles, CSV/TSV, and Excel layers, with coordinate reprojection, clustered places, category filters, boundary attributes, multiple basemaps, distance/area measurement, and GeoJSON or PNG export. Bounded Google Places and AWS GrabMaps collection supports pagination, polygon filtering, provider-level deduplication, and separate raw Excel extracts with explicit caps and errors.',
-      'The comparison engine links permitted source observations and matches them against HERE baselines using name similarity, category, phone, address, website, and distance bands. It explains matching signals and candidate differences, distinguishes chain branches and colocated businesses, and proposes new, updated, unchanged, verification, or potential closure outcomes.',
-      'Role- and AOI-scoped workflows allocate review tasks, capture supporting evidence, route field verification, and require independent QC. The delivery pipeline checks approved records against blocker rules before writing HERE Excel templates, manifests, QC checklists, and checksum-backed snapshots. Raw provider extracts remain separate from the approved customer-delivery workflow.'
+      'GeoDiscover, presented in the repository as JSAN Places Intelligence, is a Southeast Asia places-intelligence POC built with React, MapLibre, FastAPI, and PostgreSQL/PostGIS. It connects customer baseline datasets, area-of-interest exploration, source comparison, review tasks, and quality-controlled delivery.'
+    ],
+    workflow: [
+      { title: 'Import the baseline', description: 'CSV and Excel imports preserve original columns alongside normalized identities, categories, addresses, and spatial coordinates. Atomic validation rejects invalid or duplicate IDs and inconsistent coordinates, while changed files create new dataset versions. PostGIS geometry columns and GiST indexes support persistent geospatial data access.' },
+      { title: 'Explore the area and collect observations', description: 'The interactive AOI viewer supports GeoJSON, Shapefiles, CSV/TSV, and Excel layers, with coordinate reprojection, clustered places, category filters, boundary attributes, multiple basemaps, distance/area measurement, and GeoJSON or PNG export. Bounded Google Places and AWS GrabMaps collection supports pagination, polygon filtering, provider-level deduplication, and separate raw Excel extracts with explicit caps and errors.' },
+      { title: 'Compare and explain matches', description: 'The comparison engine links permitted source observations and matches them against HERE baselines using name similarity, category, phone, address, website, and distance bands. It explains matching signals and candidate differences, distinguishes chain branches and colocated businesses, and proposes new, updated, unchanged, verification, or potential closure outcomes.' },
+      { title: 'Verify findings and deliver approved records', description: 'Role- and AOI-scoped workflows allocate review tasks, capture supporting evidence, route field verification, and require independent QC. The delivery pipeline checks approved records against blocker rules before writing HERE Excel templates, manifests, QC checklists, and checksum-backed snapshots. Raw provider extracts remain separate from the approved customer-delivery workflow.' },
     ],
     role: 'Geospatial Engineering & Full Stack',
     year: '',

@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import { ArrowLeft, ArrowRight, ExternalLink } from 'lucide-react'
 import { GlassCard } from '@/components/ui/GlassCard'
@@ -7,10 +7,13 @@ import { Reveal } from '@/components/ui/Reveal'
 import { ProjectArtwork } from '@/components/sections/Projects'
 import { ProjectPreview } from '@/components/ui/ProjectPreview'
 import { getProjectBySlug, projects } from '@/data/projects'
+import { geoDemoPlaces } from '@/data/geoDemo'
 
 export function ProjectDetail() {
   const { slug } = useParams<{ slug: string }>()
   const project = slug ? getProjectBySlug(slug) : undefined
+  const [animateMap, setAnimateMap] = useState(true)
+  const [selectedCity, setSelectedCity] = useState(geoDemoPlaces[0].city)
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior })
@@ -21,6 +24,8 @@ export function ProjectDetail() {
   const index = projects.findIndex((p) => p.slug === project.slug)
   const prev = projects[(index - 1 + projects.length) % projects.length]
   const next = projects[(index + 1) % projects.length]
+  const geoDiscover = project.slug === 'geodiscover'
+  const selectedPlace = geoDemoPlaces.find((place) => place.city === selectedCity) ?? geoDemoPlaces[0]
 
   return (
     <article className="project-detail-page mx-auto max-w-3xl px-4 py-16 sm:px-6">
@@ -35,8 +40,41 @@ export function ProjectDetail() {
       <Reveal>
         <div className="mt-8">
           {project.slug === 'aeromind' || project.slug === 'geodiscover'
-            ? <ProjectArtwork geo={project.slug === 'geodiscover'} />
+            ? <ProjectArtwork geo={geoDiscover} animated={geoDiscover && animateMap} selection={geoDiscover ? { selectedCity, onSelectCity: setSelectedCity } : undefined} />
             : <ProjectPreview slug={project.slug} title={project.title} />}
+          {geoDiscover && (
+            <section className="mt-3" aria-labelledby="geo-demo-heading">
+              <div className="flex flex-wrap items-center justify-between gap-x-4">
+                <h2 id="geo-demo-heading" className="font-heading text-lg font-semibold">Explore sample places</h2>
+                <div className="work-motion-control !m-0">
+                  <button type="button" onClick={() => setAnimateMap((value) => !value)}>
+                    {animateMap ? 'Pause map animation' : 'Play map animation'}
+                  </button>
+                </div>
+              </div>
+              <p className="mt-1 text-sm text-muted-foreground">Select a marker or city to see how a fictional place was matched and verified.</p>
+              <div className="mt-4 flex flex-wrap gap-2" role="group" aria-label="Sample cities">
+                {geoDemoPlaces.map(({ city }) => (
+                  <button
+                    key={city}
+                    type="button"
+                    aria-pressed={selectedCity === city}
+                    onClick={() => setSelectedCity(city)}
+                    className="cursor-pointer rounded-full border border-border px-3 min-h-11 text-sm hover:bg-surface aria-pressed:bg-accent aria-pressed:text-background"
+                  >
+                    {city}
+                  </button>
+                ))}
+              </div>
+              <div aria-live="polite" aria-atomic="true" className="mt-4 rounded-xl border border-border bg-surface p-4 sm:p-5">
+                <h3 className="font-heading font-semibold">{selectedPlace.name} · {selectedPlace.city}</h3>
+                <dl className="mt-3 grid gap-4 text-sm sm:grid-cols-2">
+                  <div><dt className="font-semibold">Why it matched</dt><dd className="mt-1 text-muted-foreground">{selectedPlace.match}</dd></div>
+                  <div><dt className="font-semibold">Verification evidence</dt><dd className="mt-1 text-muted-foreground">{selectedPlace.evidence}</dd></div>
+                </dl>
+              </div>
+            </section>
+          )}
         </div>
 
         <div className="mt-8 flex flex-wrap items-start justify-between gap-4">
@@ -75,6 +113,20 @@ export function ProjectDetail() {
           <p key={i}>{paragraph}</p>
         ))}
       </Reveal>
+
+      {project.workflow && (
+        <section aria-labelledby="project-workflow" className="mt-10">
+          <h2 id="project-workflow" className="font-heading text-2xl font-semibold">How GeoDiscover works</h2>
+          <ol className="mt-4 list-decimal space-y-4 pl-7 marker:font-semibold marker:text-accent">
+            {project.workflow.map((step) => (
+              <li key={step.title} className="border-t border-border py-3 pl-2">
+                <h3 className="font-semibold">{step.title}</h3>
+                <p className="mt-1 max-w-[75ch] leading-relaxed text-muted-foreground">{step.description}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
+      )}
 
       <div className="mt-10 grid gap-5 sm:grid-cols-2">
         <Reveal delay={0.15}>

@@ -1,39 +1,64 @@
-﻿/** Original schematic illustrations; not live map data or inspection results. */
-export function GeoMapArtwork() {
-  const places = [
-    { x: 120, y: 220, name: 'Cafe', color: '#e4c78f' },
-    { x: 300, y: 110, name: 'Clinic', color: '#c9e4be' },
-    { x: 480, y: 220, name: 'Market', color: '#e4c78f' },
-    { x: 300, y: 330, name: 'Library', color: '#c9e4be' },
-  ]
-  return <>
-    <rect x="15" y="22" width="690" height="356" rx="8" fill="#26392e" stroke="#64785a" strokeOpacity=".4" />
-    {/* City blocks, green spaces, and a river provide a readable map context. */}
-    {[45,155,335,515].map((x,i)=>[48,140,250].map((y,j)=><g key={`${i}-${j}`}>
-      <rect x={x} y={y} width={i===0?48:105} height="52" rx="4" fill={i===1&&j===2?'#526644':'#3b4d3c'} />
-      <path d={`M${x+8} ${y+10}h${i===0?18:35}v30h-${i===0?18:35}z M${x+55} ${y+10}h28v14h-28z M${x+55} ${y+31}h28v11h-28z`} fill="#718266" opacity={i===0 ? 0 : .26} />
-    </g>))}
-    <path d="M668 23 Q605 98 657 173 T642 303 Q620 350 654 378" stroke="#456b67" strokeWidth="32" />
-    <path d="M668 23 Q605 98 657 173 T642 303 Q620 350 654 378" stroke="#86a8a0" strokeWidth="1" opacity=".4" />
-    <path d="M120 23V378 M300 23V378 M480 23V378 M620 23V378 M16 110H640 M16 220H670 M16 330H635" stroke="#87917a" strokeWidth="10" opacity=".35" />
-    <path d="M120 23V378 M300 23V378 M480 23V378 M620 23V378 M16 110H640 M16 220H670 M16 330H635" stroke="#c5cbb0" strokeWidth="1" opacity=".28" />
-    <path d="M88 75H530V350H88Z" fill="#c9df9f" fillOpacity=".03" stroke="#c9df9f" strokeDasharray="6 6" opacity=".65" />
-    <text x="98" y="63" fill="#d0dfb5" fontSize="12" letterSpacing="1.5">AREA OF INTEREST</text>
-    <text x="180" y="281" fill="#b3c59f" fontSize="11" letterSpacing="1">CITY PARK</text>
-    <path d="M120 300V220H300V110H480V220H585" stroke="#d4e7ae" strokeWidth="10" opacity=".08" strokeLinejoin="round" />
-    <path className="geo-route-flow" d="M120 300V220H300V110H480V220H585" stroke="#e0edb8" strokeWidth="3" strokeDasharray="7 8" strokeLinejoin="round" />
-    <circle className="map-traveler" r="5" fill="#fff6d4" stroke="#92ab78" strokeWidth="4" />
-    {places.map((place,i)=><g key={place.name}>
-      <circle className="geo-marker-pulse" style={{animationDelay:`${i * -.9}s`}} cx={place.x} cy={place.y} r="19" stroke={place.color} />
-      <path d={`M${place.x} ${place.y}c-5-7-12-13-12-20a12 12 0 0 1 24 0c0 7-7 13-12 20Z`} fill={place.color} stroke="#26392e" strokeWidth="2" />
-      <circle cx={place.x} cy={place.y-20} r="3" fill="#26392e" />
-      <rect x={place.x+19} y={place.y-38} width={place.name.length*9+20} height="26" rx="3" fill="#203126" stroke="#879e72" strokeOpacity=".5" />
-      <text x={place.x+29} y={place.y-20} fill="#edf2dc" fontSize="15">{place.name}</text>
-    </g>)}
-    <g transform="translate(665 55)"><path d="M0 0-7 19 0 15 7 19Z" fill="#d6e2c2" /><text x="0" y="-7" textAnchor="middle" fill="#d6e2c2" fontSize="11">N</text></g>
-    <path d="M552 355v6h65v-6" stroke="#c5d2b4" />
-    <text x="585" y="348" textAnchor="middle" fill="#c5d2b4" fontSize="10">ILLUSTRATIVE MAP</text>
-  </>
+import type { CSSProperties } from 'react'
+import { geoDemoPlaces } from '@/data/geoDemo'
+
+export type GeoMapSelection = {
+  selectedCity: string
+  onSelectCity: (city: string) => void
+}
+
+/** World coastlines are from Natural Earth. */
+export function GeoMapArtwork({ selection }: { selection?: GeoMapSelection }) {
+  return (
+    <>
+      <image href="/geodiscover-world.svg" width="720" height="360" />
+      <rect x="260" y="230" width="254" height="108" rx="8" fill="#203126" stroke="#91a989" />
+      <text x="275" y="253" fill="#eff4e6" fontSize="15" fontWeight="600">Global POI workflow</text>
+      <path d="M282 281H488" stroke="#7b927a" strokeDasharray="4 4" />
+      <g className="geo-stage">
+        <circle className="geo-poi-scan" cx="305" cy="281" r="21" stroke="#f5d99e" strokeWidth="1.5" />
+        <circle cx="305" cy="281" r="15" fill="#f5d99e" />
+        <path d="M305 287c-3-4-6-6-6-9a6 6 0 0 1 12 0c0 3-3 5-6 9Z" stroke="#203126" strokeWidth="1.5" />
+        <text x="305" y="318" textAnchor="middle" fill="#fff2d4" fontSize="13">Discover</text>
+      </g>
+      <g className="geo-stage geo-stage-check">
+        <circle cx="386" cy="281" r="15" fill="#cae2ee" />
+        <circle cx="386" cy="281" r="5" stroke="#203126" strokeWidth="1.5" />
+        <circle className="geo-candidate" cx="386" cy="281" r="2.5" fill="#203126" />
+        <path d="M386 271v4m0 12v4m-10-10h4m12 0h4" stroke="#203126" strokeWidth="1.5" />
+        <text x="386" y="318" textAnchor="middle" fill="#e7f6fc" fontSize="13">Locate</text>
+      </g>
+      <g className="geo-stage geo-stage-verify">
+        <circle cx="467" cy="281" r="15" fill="#d5e9ab" />
+        <path className="geo-evidence-check" d="m460 281 5 5 9-10" pathLength="1" stroke="#203126" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <text x="467" y="318" textAnchor="middle" fill="#edf5dc" fontSize="13">Verify</text>
+      </g>
+      {geoDemoPlaces.map(({ city, x, y }, index) => (
+        <g
+          key={city}
+          className={selection ? 'geo-demo-marker' : undefined}
+          role={selection ? 'button' : undefined}
+          tabIndex={selection ? 0 : undefined}
+          aria-label={selection ? `Explore sample place in ${city}` : undefined}
+          aria-pressed={selection ? selection.selectedCity === city : undefined}
+          onClick={selection ? () => selection.onSelectCity(city) : undefined}
+          onKeyDown={selection ? (event) => {
+            if (event.key !== 'Enter' && event.key !== ' ') return
+            event.preventDefault()
+            selection.onSelectCity(city)
+          } : undefined}
+          stroke="#203126"
+          strokeWidth="1.5"
+          style={{ '--geo-phase-offset': `${index * -0.8}s` } as CSSProperties}
+        >
+          {selection && <circle className="geo-demo-hit-area" cx={x} cy={y} r="19" fill="transparent" stroke="transparent" />}
+          <circle className="geo-map-scan" cx={x} cy={y} r="13" stroke="#f5d99e" />
+          <circle className="geo-stage" cx={x} cy={y} r="5" fill="#f5d99e" />
+          <circle className="geo-stage geo-stage-check" cx={x} cy={y} r="7" stroke="#cae2ee" />
+          <path className="geo-stage geo-stage-verify" d={`M${x - 3} ${y}l2 2 4-4`} stroke="#d5e9ab" strokeWidth="2" strokeLinecap="round" />
+        </g>
+      ))}
+    </>
+  )
 }
 
 export function TowerAssetArtwork() {
