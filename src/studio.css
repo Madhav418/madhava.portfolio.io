@@ -75,7 +75,7 @@ main > #projects .studio-section-heading h2 { font-size:clamp(44px,6.4vw,84px); 
 .featured-description { display:grid; grid-template-columns:1fr 1fr; gap:64px; padding-top:30px; }
 .featured-description h3 { font-size:clamp(32px,4vw,52px); letter-spacing:-.06em; font-weight:500; margin-top:10px; }
 .featured-description h3 a { display:flex; align-items:center; gap:24px; width:fit-content; }
-.featured-description p { font-size:15px; line-height:1.8; }
+.featured-description p { font-size:1rem; line-height:1.6; }
 .featured-description .work-stack { margin-top:18px; }
 .archive-heading { display:flex; justify-content:space-between; padding-bottom:22px; border-bottom:1px solid var(--color-border); }
 .archive-heading > span:last-child { font-size:10px; color:var(--color-muted-foreground); }
@@ -84,7 +84,7 @@ main > #projects .studio-section-heading h2 { font-size:clamp(44px,6.4vw,84px); 
 .studio-archive h3 { font-size:clamp(20px,2.5vw,32px); letter-spacing:-.04em; font-weight:500; }
 .studio-archive h3 a { display:flex; align-items:center; gap:20px; width:fit-content; }
 .studio-archive h3 a:hover { color:var(--color-accent); }
-.studio-archive p { font-size:12px; line-height:1.8; color:var(--color-muted-foreground); max-width:650px; margin-top:12px; }
+.studio-archive p { font-size:1rem; line-height:1.6; color:var(--color-muted-foreground); max-width:650px; margin-top:12px; }
 main > section:not(.studio-hero):not(.studio-work) { max-width:1264px; padding:80px 48px; }
 main > section:not(.studio-hero):not(.studio-work) h2 { font-size:clamp(34px,4.4vw,58px); font-weight:500; letter-spacing:-.055em; }
 #about,#contact { border:0; border-radius:0; margin:0 auto; background:transparent; }
@@ -167,7 +167,7 @@ footer > .glass { background:transparent; box-shadow:none; border-radius:0; max-
   .artwork-bottom > span:first-child { font-size:11px; }
   .visual-open { width:42px; height:42px; bottom:18px; right:18px; }
   .featured-description { grid-template-columns:1fr; gap:15px; padding-top:24px; }
-  .featured-description p,.studio-section-heading > p,.studio-archive p { font-size:16px; line-height:1.6; }
+  .studio-section-heading > p { font-size:1rem; line-height:1.6; }
   .work-links { margin-top:10px; gap:8px 20px; }
   .studio-archive article { grid-template-columns:22px 1fr; gap:12px; }
   .archive-role { grid-column:2; }

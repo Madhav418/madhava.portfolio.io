@@ -52,7 +52,7 @@ export function ProjectDetail() {
                   </button>
                 </div>
               </div>
-              <p className="mt-1 text-sm text-muted-foreground">Select a marker or city to see how a fictional place was matched and verified.</p>
+              <p className="mt-1 text-base leading-relaxed text-muted-foreground">Select a marker or city to see how a fictional place was matched and verified.</p>
               <div className="mt-4 flex flex-wrap gap-2" role="group" aria-label="Sample cities">
                 {geoDemoPlaces.map(({ city }) => (
                   <button
@@ -68,7 +68,7 @@ export function ProjectDetail() {
               </div>
               <div aria-live="polite" aria-atomic="true" className="mt-4 rounded-xl border border-border bg-surface p-4 sm:p-5">
                 <h3 className="font-heading font-semibold">{selectedPlace.name} · {selectedPlace.city}</h3>
-                <dl className="mt-3 grid gap-4 text-sm sm:grid-cols-2">
+                <dl className="mt-3 grid gap-4 text-base leading-relaxed sm:grid-cols-2">
                   <div><dt className="font-semibold">Why it matched</dt><dd className="mt-1 text-muted-foreground">{selectedPlace.match}</dd></div>
                   <div><dt className="font-semibold">Verification evidence</dt><dd className="mt-1 text-muted-foreground">{selectedPlace.evidence}</dd></div>
                 </dl>
@@ -132,13 +132,13 @@ export function ProjectDetail() {
         <Reveal delay={0.15}>
           <GlassCard className="h-full p-6">
             <h2 className="font-heading text-lg font-semibold text-foreground">The challenge</h2>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{project.challenge}</p>
+            <p className="mt-3 text-base leading-relaxed text-muted-foreground">{project.challenge}</p>
           </GlassCard>
         </Reveal>
         <Reveal delay={0.2}>
           <GlassCard className="h-full p-6">
             <h2 className="font-heading text-lg font-semibold text-foreground">The solution</h2>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{project.solution}</p>
+            <p className="mt-3 text-base leading-relaxed text-muted-foreground">{project.solution}</p>
           </GlassCard>
         </Reveal>
       </div>
@@ -150,7 +150,7 @@ export function ProjectDetail() {
             {project.results.map((result) => (
               <li
                 key={result}
-                className="flex gap-2 text-sm text-muted-foreground before:mt-2 before:h-1.5 before:w-1.5 before:shrink-0 before:rounded-full before:bg-accent-2"
+                className="flex gap-2 text-base leading-relaxed text-muted-foreground before:mt-2.5 before:h-1.5 before:w-1.5 before:shrink-0 before:rounded-full before:bg-accent-2"
               >
                 {result}
               </li>
